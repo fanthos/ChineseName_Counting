@@ -11,6 +11,7 @@ t_num_xiong = np.array([2,4,9,10,12,14,19,20,22,26,27,28,30,34,36,38,40,42,43,44
 #t_Three_cai 三才搭配表
 #t_Three_cai[0]: 1木 2火 3土 4金 5水
 #t_Three_cai[1]: 1大吉 2中吉 3吉多凶少 4凶多吉少 5凶 6大凶
+t_Three_cai_chinese = ['','大吉','中吉','吉多凶少','凶多吉少','凶','大凶']
 t_Three_cai = np.array([
             [[1,1,1],[1,0,0]], 
             [[1,1,2],[1,0,0]], 
@@ -173,7 +174,7 @@ def count_3cai_5ge(x,y,z):
     c2=x+y
     c3=y+z
     c4=z+1
-    c5=c1+c2+c3
+    c5=x+y+z
     
     c1_dot = change_09_to_15(c1)
     c2_dot = change_09_to_15(c2)
@@ -216,8 +217,8 @@ def main():
             five_ge_ret = tabel_check_5ge(five_ge[0],five_ge[1],five_ge[2],five_ge[3],five_ge[4])
             #print("五格吉数：%d"%five_ge_ret)
     
-            if three_cai_ret==1 and five_ge_ret>=5: #筛选出三才大吉+五格4吉以上组合【请安实际修改】
-                print("笔画数：%d %d；三才大吉+五格吉数%d"%(i,j,five_ge_ret))
+            if three_cai_ret<=1 and five_ge_ret>=5: #筛选出三才大吉+五格4吉以上组合【请安实际修改】
+                print("笔画数：%d %d；三才%s+五格吉数%d"%(i,j,t_Three_cai_chinese[int(three_cai_ret)],five_ge_ret))
 
 if __name__ == '__main__':
     main()
